@@ -1,0 +1,24 @@
+server:
+  port: 9527
+
+
+
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://106.13.24.236:3306/hw?characterEncoding=utf8&serverTimezone=UTC&useSSL=false
+    driverClassName: com.mysql.jdbc.Driver
+
+
+mybatis:
+  mapper-locations: classpath*:/mappers/*/*Mapper.xml
+  type-aliases-package: com.handwrit.entity
+
+logging:
+  # 默认日志路径文件名
+  file: log/hw.log
+  file.max-size: 1MB
+  level:
+    #在控制台打印sql语句
+    com.handwrit.manage.mapper : debug

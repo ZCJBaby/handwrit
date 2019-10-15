@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- defaultModelType="flat" 设置复合主键时不单独为主键创建实体 -->
+    <context id="Postgres" defaultModelType="flat">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.handwrit.manage.utils.base.TkMapper"/>
+            <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+            <property name="caseSensitive" value="false"/>
+        </plugin>
+
+
+        <!--注释-->
+        <commentGenerator>
+            <property name="addRemarkComments" value="true"/><!-- 将数据库中表的字段描述信息添加到注释 -->
+            <property name="suppressAllComments" value="false"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="false" /> <!-- 是否生成注释代时间戳-->
+        </commentGenerator>
+
+        <!-- 数据库连接 -->
+        <jdbcConnection
+        driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://106.13.24.236:3306/hw"
+        userId="root"
+        password="123456"/>
+
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceLong" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成POJO对象，并将类放到com.songguoliang.springboot.entity包下 -->
+        <javaModelGenerator targetPackage="com.handwrit.manage.entity.sys" targetProject="src/gen/java"></javaModelGenerator>
+        <!-- 生成mapper xml文件，并放到resources下的mapper文件夹下 -->
+        <sqlMapGenerator targetPackage="mappers/sys"  targetProject="src/gen/java/resources">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+
+        <!-- 生成mapper xml对应dao接口，放到com.songguoliang.springboot.mapper包下-->
+        <javaClientGenerator targetPackage="com.handwrit.manage.mapper.sys" targetProject="src/gen/java" type="XMLMAPPER"></javaClientGenerator>
+
+        <!--不生成帮助类（Exmaples） -->
+        <!-- enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+            enableSelectByExample="false" selectByExampleQueryId="false" -->
+        <!-- table标签可以有多个，至少一个，tableName指定表名，可以使用_和%通配符 -->
+        <table tableName="sys_%"
+               enableInsert="false"
+               enableDeleteByPrimaryKey="false"
+               enableSelectByPrimaryKey="true"
+               enableUpdateByPrimaryKey="false"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <!-- 数据库中表名有时我们都会带个前缀，而实体又不想带前缀，这个配置可以把实体的前缀去掉 -->
+            <domainObjectRenamingRule searchString="Sys" replaceString=""/>
+        </table>
+    </context>
+</generatorConfiguration>
+
